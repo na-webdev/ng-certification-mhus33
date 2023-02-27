@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('@weather/weather.module').then((m) => m.WeatherModule),
+      import('./weather/weather.module').then((m) => m.WeatherModule),
   },
 ];
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, tap } from 'rxjs';
-import { WeatherDataI } from '@weather/interfaces/weather-data.interface';
+import { WeatherDataI } from '../interfaces/weather-data.interface';
 
 const baseUrl = environment.weatherApiURL;
 
@@ -29,6 +29,7 @@ export class WeatherService {
       }),
       tap((data) => {
         const weathers = [...this.weathersSubject.value, data];
+        console.log(weathers);
         this.weathersSubject.next(weathers);
       })
     );

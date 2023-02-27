@@ -3,7 +3,7 @@
   "compilerOptions": {
     "module": "esnext",
     "outDir": "./dist/out-tsc",
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -14,8 +14,6 @@
     "paths": {
       "EnumUtils": ["dist/enum-utils"],
       "EnumUtils/*": ["dist/enum-utils/*"],
-      "@weather": ["./app/weather"],
-      "@weather/*": ["./app/weather/*"]
     }
   },
   "angularCompilerOptions": {
