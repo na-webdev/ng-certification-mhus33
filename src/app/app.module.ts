@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { WeatherModule } from './weather/weather.module';
+import { WeatherModule } from './weather';
 
 @NgModule({
   imports: [BrowserModule, AppRoutingModule, WeatherModule],
