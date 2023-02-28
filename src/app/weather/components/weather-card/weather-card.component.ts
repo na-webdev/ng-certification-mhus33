@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { WeatherDataI } from '../../interfaces';
 
 @Component({
   selector: 'app-weather-card',
   templateUrl: './weather-card.component.html',
-  styleUrls: ['./weather-card.component.css']
+  styleUrls: ['./weather-card.component.css'],
 })
-export class WeatherCardComponent implements OnInit {
+export class WeatherCardComponent {
+  @Input() weatherData: WeatherDataI;
+  @Output() removeWeather = new EventEmitter<string>();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  remove() {
+    this.removeWeather.emit(this.weatherData.zipCode);
   }
 
+  get imageName() {
+    return this.weatherData.weather[0].main.toLowerCase();
+  }
 }

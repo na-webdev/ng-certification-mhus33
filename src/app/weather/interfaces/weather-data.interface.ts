@@ -14,24 +14,10 @@ export interface MainI {
   humidity: number;
 }
 
-export interface WindI {
-  speed: number;
-  deg: number;
-}
-
-export interface SysI {
-  type: number;
-  id: number;
-  country: string;
-  sunrise: number;
-  sunset: number;
-}
-
 export interface WeatherDataI {
   weather: WeatherI[];
   main: MainI;
-  wind: WindI;
-  sys: SysI;
   id: number;
   name: string;
+  zipCode: string;
 }

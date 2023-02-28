@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, tap } from 'rxjs';
-import { WeatherDataI } from '../interfaces/weather-data.interface';
+import { BehaviorSubject, filter, map, of, take, tap } from 'rxjs';
+import { WeatherDataI } from '../interfaces';
 
 const baseUrl = environment.weatherApiURL;
 
@@ -15,28 +15,57 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   addLocationWeather(zipCode: string) {
-    return this.http.get<any>(`${baseUrl}?zip=${zipCode}`).pipe(
+    const existingLocation = this.weathersSubject.value.find(
+      (weatherData) => weatherData.zipCode === zipCode
+    );
+    return (
+      existingLocation
+        ? of(null)
+        : this.http.get<any>(`${baseUrl}weather?zip=${zipCode}`)
+    ).pipe(
+      take(1),
+      filter((res) => !!res),
       map((response): WeatherDataI => {
-        const { weather, main, sys, name, wind, id } = response;
+        const { weather, main, name, id } = response;
         return {
           weather,
           main,
-          sys,
           name,
-          wind,
           id,
+          zipCode,
         };
       }),
       tap((data) => {
         const weathers = [...this.weathersSubject.value, data];
-        console.log(weathers);
+        this.saveZipCodesToLocalstorage(weathers);
+
         this.weathersSubject.next(weathers);
       })
     );
   }
 
-  getWeathersFromLocalstorage() {
-    const weathers = JSON.parse(localStorage.getItem('weathers'));
+  removeLocationWeather(zipCode) {
+    const weathers = this.weathersSubject.value.filter(
+      (weatherData) => weatherData.zipCode !== zipCode
+    );
+    this.saveZipCodesToLocalstorage(weathers);
     this.weathersSubject.next(weathers);
+  }
+
+  getWeathersFromLocalstorage() {
+    const locationZipCodes = JSON.parse(localStorage.getItem('zipCodes'));
+    if (locationZipCodes)
+      locationZipCodes.forEach((zipCode) =>
+        this.addLocationWeather(zipCode).subscribe()
+      );
+  }
+
+  saveZipCodesToLocalstorage(weathers: WeatherDataI[]) {
+    const locationZipCodes = weathers.map((weatherData) => weatherData.zipCode);
+    localStorage.setItem('zipCodes', JSON.stringify(locationZipCodes));
+  }
+
+  getLocationForecast(zipCode: string) {
+    return this.http.get(`${baseUrl}forecast?zip=${zipCode}`);
   }
 }

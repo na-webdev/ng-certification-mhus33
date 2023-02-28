@@ -1,2 +1,8 @@
-<app-add-location-form (addLocation)="addLocationWeather($event)"></app-add-location-form>
-<app-weather-card-list *ngFor="let weather of weathers$ | async"></app-weather-card-list>
+<app-add-location-form
+  (addLocation)="addLocationWeather($event)"
+></app-add-location-form>
+<app-weather-card
+  [weatherData]="weather"
+  (removeWeather)="removeLocationWeather($event)"
+  *ngFor="let weather of weathers$ | async; trackBy: trackByWeathers"
+></app-weather-card>
