@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'forecast/:zipcode',
     component: LocationForecastComponent,
     resolve: {
-      forecastData: LocationForecastResolver,
+      cityForecast: LocationForecastResolver,
     },
   },
 ];
@@ -21,5 +21,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [LocationForecastResolver],
 })
 export class WeatherRoutingModule {}

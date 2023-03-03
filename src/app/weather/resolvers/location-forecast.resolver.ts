@@ -4,16 +4,21 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { WeatherService } from '../services';
+import { CityForecastI } from '../interfaces/forecast-data.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocationForecastResolver implements Resolve<boolean> {
+export class LocationForecastResolver implements Resolve<CityForecastI> {
+  constructor(private readonly weatherService: WeatherService) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
-    return of(true);
+  ): Observable<CityForecastI> {
+    const zipCode = route.params.zipcode || '10001';
+    console.log(route);
+    return this.weatherService.getLocationForecast(zipCode);
   }
 }

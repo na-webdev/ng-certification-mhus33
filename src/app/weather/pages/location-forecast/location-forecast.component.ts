@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherService } from '../../services';
+import {
+  CityForecastI,
+  ForecastI,
+} from '../../interfaces/forecast-data.interface';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-location-forecast',
@@ -7,9 +12,19 @@ import { WeatherService } from '../../services';
   styleUrls: ['./location-forecast.component.css'],
 })
 export class LocationForecastComponent implements OnInit {
-  constructor(private readonly weatherService: WeatherService) {}
+  cityForecast$: Observable<CityForecastI>;
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // this.weatherService.getLocationForecast('95472').subscribe(console.log);
+    this.cityForecast$ = this.route.data.pipe(
+      map((data: { cityForecast: CityForecastI }) => data.cityForecast)
+    );
+  }
+
+  getWeatherName(forecast: Partial<ForecastI>, lowercase = true) {
+    let result = forecast.weather[0].main;
+    if (result.toLowerCase() === 'clear') result = 'sun';
+    if (lowercase) result = result.toLowerCase();
+    return result;
   }
 }

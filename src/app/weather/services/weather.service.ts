@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, map, of, take, tap } from 'rxjs';
 import { WeatherDataI } from '../interfaces';
+import { CityForecastI } from '../interfaces/forecast-data.interface';
 
 const baseUrl = environment.weatherApiURL;
 
@@ -38,6 +39,7 @@ export class WeatherService {
       tap((data) => {
         const weathers = [...this.weathersSubject.value, data];
         this.saveZipCodesToLocalstorage(weathers);
+        console.log(weathers);
 
         this.weathersSubject.next(weathers);
       })
@@ -66,6 +68,21 @@ export class WeatherService {
   }
 
   getLocationForecast(zipCode: string) {
-    return this.http.get(`${baseUrl}forecast?zip=${zipCode}`);
+    return this.http
+      .get<any>(`${baseUrl}forecast/daily?zip=${zipCode}&cnt=5`)
+      .pipe(
+        take(1),
+        map((res): CityForecastI => {
+          let { city, list } = res;
+          console.log(list);
+          return {
+            city,
+            list: list.map((data) => ({
+              ...data,
+              dt: new Date(parseInt(data.dt) * 1000),
+            })),
+          };
+        })
+      );
   }
 }

@@ -1,35 +1,26 @@
+import { WeatherI } from './weather-data.interface';
+
 export interface City {
   id: number;
   name: string;
 }
 
-export interface Main {
-  temp: number;
-  feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  sea_level: number;
-  grnd_level: number;
-  humidity: number;
-  temp_kf: number;
+export interface Temp {
+  day: number;
+  min: number;
+  max: number;
+  night: number;
+  eve: number;
+  morn: number;
 }
 
-export interface Weather {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
-}
-
-export interface List {
+export interface ForecastI {
   dt: number;
-  main: Main;
-  weather: Weather[];
-  dt_txt: string;
+  temp: Temp;
+  weather: WeatherI[];
 }
 
-export interface RootObject {
+export interface CityForecastI {
   city: City;
-  list: List[];
+  list: ForecastI[];
 }

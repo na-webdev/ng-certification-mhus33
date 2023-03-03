@@ -5,18 +5,16 @@ export interface WeatherI {
   icon: string;
 }
 
-export interface MainI {
+export interface TemperatureI {
   temp: number;
   feels_like: number;
   temp_min: number;
   temp_max: number;
-  pressure: number;
-  humidity: number;
 }
 
 export interface WeatherDataI {
   weather: WeatherI[];
-  main: MainI;
+  main: TemperatureI;
   id: number;
   name: string;
   zipCode: string;
