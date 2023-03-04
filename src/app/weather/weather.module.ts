@@ -5,7 +5,6 @@ import { WeatherCardComponent } from './components';
 import { FormsModule } from '@angular/forms';
 import { LocationForecastComponent } from './pages';
 import { LocationsWeatherInfoComponent } from './pages';
-import { WeatherCardListComponent } from './components';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { WeatherRoutingModule } from './weather-routing.module';
 import { WeatherApiInterceptor } from './interceptors';
@@ -17,7 +16,6 @@ import { WeatherImageUrlPipe } from './pipes/weather-image-url.pipe';
     WeatherCardComponent,
     LocationForecastComponent,
     LocationsWeatherInfoComponent,
-    WeatherCardListComponent,
     WeatherImageUrlPipe,
   ],
   imports: [CommonModule, FormsModule, WeatherRoutingModule, HttpClientModule],
