@@ -17,7 +17,8 @@
     <div>
       <span (click)="remove()" class="close">×</span>
       <img
-        src="https://www.angulartraining.com/images/weather/{{ imageName }}.png"
+        width="200"
+        src="{{ weatherData.weather[0].main | weatherImageUrl }}"
         alt="{{ imageName }}"
       />
     </div>

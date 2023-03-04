@@ -6,19 +6,18 @@
       </h3>
     </div>
     <ul class="list-group">
-      <!---->
       <li class="list-group-item" *ngFor="let forecast of forecastData.list">
         {{ forecast.dt | date: 'EEEE, MMMM d' }}:
-        {{ getWeatherName(forecast, false) }} - Min: {{ forecast.temp.min }} - Max:
+        {{ getWeatherName(forecast, false) }} - Min: {{ forecast.temp.min }} -
+        Max:
         {{ forecast.temp.max }}
 
         <img
           class="icon"
-          src="https://www.angulartraining.com/images/weather/{{
-            getWeatherName(forecast)
+          src="http://openweathermap.org/img/wn/{{
+            forecast.weather[0].icon
           }}.png"
-
-          alt="{{getWeatherName(forecast)}}"
+          alt="{{ getWeatherName(forecast) }}"
         />
       </li>
     </ul>

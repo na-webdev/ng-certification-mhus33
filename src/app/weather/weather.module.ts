@@ -9,6 +9,7 @@ import { WeatherCardListComponent } from './components';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { WeatherRoutingModule } from './weather-routing.module';
 import { WeatherApiInterceptor } from './interceptors';
+import { WeatherImageUrlPipe } from './pipes/weather-image-url.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { WeatherApiInterceptor } from './interceptors';
     LocationForecastComponent,
     LocationsWeatherInfoComponent,
     WeatherCardListComponent,
+    WeatherImageUrlPipe,
   ],
   imports: [CommonModule, FormsModule, WeatherRoutingModule, HttpClientModule],
   providers: [
