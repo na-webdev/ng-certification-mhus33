@@ -39,7 +39,6 @@ export class WeatherService {
       tap((data) => {
         const weathers = [...this.weathersSubject.value, data];
         this.saveZipCodesToLocalstorage(weathers);
-        console.log(weathers);
 
         this.weathersSubject.next(weathers);
       })
@@ -74,7 +73,6 @@ export class WeatherService {
         take(1),
         map((res): CityForecastI => {
           let { city, list } = res;
-          console.log(list);
           return {
             city,
             list: list.map((data) => ({

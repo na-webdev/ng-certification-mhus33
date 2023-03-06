@@ -17,8 +17,7 @@ export class LocationForecastResolver implements Resolve<CityForecastI> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<CityForecastI> {
-    const zipCode = route.params.zipcode || '10001';
-    console.log(route);
+    const zipCode = route.params.zipcode;
     return this.weatherService.getLocationForecast(zipCode);
   }
 }
