@@ -2,7 +2,7 @@
   <div class="well flex">
     <div>
       <h3>{{ weatherData.name }} ({{ weatherData.zipCode }})</h3>
-      <h4>Current conditions: {{ weatherData.weather[0].main }}</h4>
+      <h4>Current conditions: {{ weatherName }}</h4>
       <h4>Temperatures today:</h4>
       <p>
         Current {{ weatherData.main.temp }} - Max
@@ -18,8 +18,8 @@
       <span (click)="remove()" class="close">×</span>
       <img
         width="200"
-        src="{{ weatherData.weather[0].main | weatherImageUrl }}"
-        alt="{{ imageName }}"
+        src="{{ weatherName | weatherImageUrl }}"
+        alt="{{ weatherName }}"
       />
     </div>
   </div>

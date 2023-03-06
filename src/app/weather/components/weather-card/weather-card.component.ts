@@ -14,7 +14,7 @@ export class WeatherCardComponent {
     this.removeWeather.emit(this.weatherData.zipCode);
   }
 
-  get imageName() {
-    return this.weatherData.weather[0].main.toLowerCase();
+  get weatherName() {
+    return this.weatherData.weather[0].main;
   }
 }
