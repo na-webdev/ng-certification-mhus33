@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddLocationFormComponent } from './components';
 import { WeatherCardComponent } from './components';
-import { FormsModule } from '@angular/forms';
 import { LocationForecastComponent } from './pages';
 import { LocationsWeatherInfoComponent } from './pages';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
