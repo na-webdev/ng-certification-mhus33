@@ -18,7 +18,7 @@ import { WeatherImageUrlPipe } from './pipes/weather-image-url.pipe';
     LocationsWeatherInfoComponent,
     WeatherImageUrlPipe,
   ],
-  imports: [CommonModule, FormsModule, WeatherRoutingModule, HttpClientModule],
+  imports: [CommonModule, WeatherRoutingModule, HttpClientModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
